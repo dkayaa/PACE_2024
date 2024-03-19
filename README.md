@@ -6,3 +6,5 @@ Deniz Dilsiz - z3463717
 Theo Graftieaux - z5258743
 
 Sankalpa Tripathee - z5420264
+
+Erika(Tingchen) Xie - z5230815
