@@ -28,11 +28,18 @@ def execKernal():
 	#to execute our Simplification/Halting rules here. 
 	print("Not Implemented")
 
-def execSolver():
+def execAlgorithm1():
 	print("Not Implemented")
 
+def execAlgorithm2():
+	print("Not Implemented")
 
+def writeOutpout(): 
+	print("Not Implemented")
+	#set of orderings in V_2 and generate linear ordering to output
+ 
 #Main
 readInput()
 execKernal()
-execSolver()
+execAlgorithm1()
+execAlgorithm2()
