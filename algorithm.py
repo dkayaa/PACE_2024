@@ -28,6 +28,9 @@ def execKernal():
 	#to execute our Simplification/Halting rules here. 
 	print("Not Implemented")
 
+def execAlgorithm():
+	print("Not Implemented")
+
 def execAlgorithm1():
 	print("Not Implemented")
 
@@ -54,14 +57,32 @@ def RRL01():
 def RRL02():
 	print("Not Implemented")
 
-def minimise():
-	#execute binary search on 
+#takes in empty partial ordering, callback function that is the branching algorithm. 
+#executes branching algorithm in a binary search  manner to find k that is minimal. 
+def minimise(po, k_max, cb = None):
 
-#Main
-readInput()
-execKernal()
-execAlgorithm1()
-execAlgorithm2()
+	#variables 
+	#po : List Partial Ordering to be populated 
+	#max_k : maximal bound for binary search (that is, the maximal number 
+	#			of crossings for bipartite graph G)
+	#cb	: callback function to run binary search on (that is, the branching algo we execute)
+
+	po = {} 
+
+	#execute binary search to find minimal k. 
+	left = 0
+	right = k_max
+	if cb:
+		while left < right:
+			mid = left + (right - left + 1) // 2  # Adding 1 to ensure rounding up
+			if cb(mid) == False:
+				left = mid
+			else:
+				right = mid - 1
+
+		#left is maximal value that returns false
+		return left + 1
+
 
 #Graph representation
 graph = {}
