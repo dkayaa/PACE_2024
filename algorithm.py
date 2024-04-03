@@ -34,10 +34,26 @@ def execAlgorithm1():
 def execAlgorithm2():
 	print("Not Implemented")
 
-def writeOutpout(): 
+def writeOutput(): 
 	print("Not Implemented")
 	#set of orderings in V_2 and generate linear ordering to output
- 
+
+#Simplification Rules
+def RR1():
+	print("Not Implemented")
+
+def RR2():
+	print("Not Implemented")
+
+def RRlarge():
+	print("Not Implemented")
+
+def RRL01():
+	print("Not Implemented")
+
+def RRL02():
+	print("Not Implemented")
+
 #Main
 readInput()
 execKernal()
