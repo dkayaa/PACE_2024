@@ -54,8 +54,28 @@ def RRL01():
 def RRL02():
 	print("Not Implemented")
 
+def minimise():
+	#execute binary search on 
+
 #Main
 readInput()
 execKernal()
 execAlgorithm1()
 execAlgorithm2()
+
+#Graph representation
+graph = {}
+#dictionary 
+#key : vertex_id v
+#values : array of vertex_id u such that there exists an edge v,u in the graph 
+
+#Linear Ordering 
+#list of vertex_ids 
+#this is generated at the end
+lo = []
+
+#Set of Partial Orderings
+#dictionary 
+#key : vertex_id v 
+#value : array of vertex_id u such that v < u in the ordering. 
+po = {}
