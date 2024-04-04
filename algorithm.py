@@ -68,14 +68,13 @@ def writeOutput():
 	#set of orderings in V_2 and generate linear ordering to output
 
 #gets the number of crossings between {a,b} in V_2 assuming a < b
-def getCrossings(a,b, c):
+def getCrossings(a, b, c):
 	return c[a][b]
 
 #crossings are computed and stored in a dictionary of dictionaries
 #key :vertex A 
 #value : dictionary with key : vertex B, value : num crossings.
 def computeAllCrossings(c, G, V_2, V_1):
-	print("Not Implemented")
 	n = len(V_2)
 	#init 2d array storing crossings
 	#c[a][b] indicates the number of crossings for c_ab (ie assuming a<b in Poset)
