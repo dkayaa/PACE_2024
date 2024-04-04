@@ -33,6 +33,28 @@ class Test(unittest.TestCase):
 		val = algorithm.getCrossings(3,4,c)
 		self.assertEqual(val, 1, "crossings returned: " + str(val))
 
+	def test_computeCross2XP2(self):
+		
+		#	(1)	(2)
+		#	 |	 |
+		#	(3)	(4)
+
+		c = {}
+		V_1 = [1,2]
+		V_2 = [3,4]
+		G = {}
+		G[1] = [3]
+		G[2] = [4]
+		G[3] = [1]
+		G[4] = [2]
+
+		algorithm.computeAllCrossings(c, G, V_2, V_1)
+		val = algorithm.getCrossings(3,4,c)
+		self.assertEqual(val, 0, "crossings returned: " + str(val))
+		val = algorithm.getCrossings(4,3,c)
+		self.assertEqual(val, 1, "crossings returned: " + str(val))
+
+
 	def test_computeCross3X3Bipartite(self):
 		
 		c = {}
