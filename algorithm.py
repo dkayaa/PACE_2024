@@ -90,18 +90,22 @@ def computeAllCrossings(c, G, V_2, V_1):
 		for b1 in range (a, n): #vertex in V_2
 			if (a1 == b1):
 				continue
-			for a2 in G[V_2[a]]: #vertex in V_1 that has edge incident to a1 in V_2
-				for b2 in G[V_2[b]]: #vertex in V_1 that has edge incident to b1 in V_2
-					if(a2 == b2):
-						continue
+			for a2 in G[V_2[a1]]: #vertex in V_1 that has edge incident to a1 in V_2
+				for b2 in G[V_2[b1]]: #vertex in V_1 that has edge incident to b1 in V_2
 					a1_i = a1
 					b1_i = b1
 					a2_i = V_1.index(a2)
 					b2_i = V_1.index(b2)
-					if (a1_i < b1_i) and (b2_i < a2_i):
+					if(a2_i == b2_i):
+						continue
+					if (a1_i < b1_i) and (a2_i > b2_i):
 						c[V_2[a1_i]][V_2[b1_i]]+=1
-					elif(b1_i < a1_i) and (a2_i < b2_i):
+					elif(a1_i < b1_i) and (a2_i < b2_i):
+						c[V_2[b1_i]][V_2[a1_i]]+=1 #swapping them would force a crossing
+					elif(b1_i < a1_i) and (b2_i > a2_i):
 						c[V_2[b1_i]][V_2[a1_i]]+=1
+					elif(b1_i < a1_i) and (b2_i < a2_i):
+						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing	
 			
 
 #Simplification Rules
