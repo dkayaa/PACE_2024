@@ -21,7 +21,7 @@ def RRLO1(po, k, V_2):
 def RRLO2(po, k, V_2):
     size = len(V_2)
     for a in range(size):
-        for b in range(a, size):
+        for b in range(a + 1, size):
             if incomparable(po, a, b) and not isDependent(po, a, b, V_2):
                 i = getCrossings(V_2[a], V_2[b])
                 j = getCrossings(V_2[b], V_2[a])
@@ -35,7 +35,7 @@ def RRLO2(po, k, V_2):
 def RRlarge(po, k, V_2):
     size = len(V_2)
     for a in range(size):
-        for b in range(a, size):
+        for b in range(a + 1, size):
             i = getCrossings(V_2[a], V_2[b])
             j = getCrossings(V_2[b], V_2[a])
             if i > k and j > k:
@@ -49,14 +49,15 @@ def RRlarge(po, k, V_2):
 
 
 
-def branching_algorithm(po, k, V_2):
+def branching_algorithm(po, k, V_2, c):
     prevK = -1
     prevSize = -1
     while prevK != k or prevSize != len(V_2):
         
         prevK = k
         prevSize = len(V_2)
-       
+        
+        
         # RRLO1
         size = len(V_2)
         for a in range(size):
@@ -80,8 +81,8 @@ def branching_algorithm(po, k, V_2):
         for a in range(size):
             for b in range(a, size):
                 if incomparable(po, a, b) and not isDependent(po, a, b, V_2):
-                    i = getCrossings(V_2[a], V_2[b])
-                    j = getCrossings(V_2[b], V_2[a])
+                    i = getCrossings(V_2[a], V_2[b], c)
+                    j = getCrossings(V_2[b], V_2[a], c)
                     if (i < j):
                         po[a].append(b)
                         k -= i
@@ -92,9 +93,9 @@ def branching_algorithm(po, k, V_2):
         # RRlarge
         size = len(V_2)
         for a in range(size):
-            for b in range(a, size):
-                i = getCrossings(V_2[a], V_2[b])
-                j = getCrossings(V_2[b], V_2[a])
+            for b in range(a + 1, size):
+                i = getCrossings(V_2[a], V_2[b], c)
+                j = getCrossings(V_2[b], V_2[a], c)
                 if i > k and j > k:
                     return False
                 elif i > k:
@@ -108,24 +109,25 @@ def branching_algorithm(po, k, V_2):
         return False
     size = len(V_2)
     for v_1 in range(size):
-        for v_2 in range(v_1, size):
-            i = getCrossings(V_2[v_1], V_2[v_2])
-            j = getCrossings(V_2[v_2], V_2[v_1])
+        for v_2 in range(v_1 + 1, size):
+            i = getCrossings(V_2[v_1], V_2[v_2], c)
+            j = getCrossings(V_2[v_2], V_2[v_1], c)
             isIncomparable = incomparable(po, v_1, v_2)
             if isIncomparable and i + j >= 4:
                 po1 = po.copy()
                 po1[v_1].append(v_2)
                 po[v_2].append(v_1)
-                return branching_algorithm(po, k - i,V_2) or branching_algorithm(po1, k-j,V_2)
+                return branching_algorithm(po, k - i,V_2, c) or branching_algorithm(po1, k-j,V_2, c)
             elif isIncomparable and (i == 1 and j == 2) or (i == 2 and j == 1) and isDependent(po,v_1,v_2):
                 po1 = po.copy()
                 po1[v_1].append(v_2)
                 po[v_2].append(v_1)
-                return branching_algorithm(po, k-i, V_2) or branching_algorithm(po1, k-j, V_2)
+                return branching_algorithm(po, k-i, V_2, c) or branching_algorithm(po1, k-j, V_2, c)
             elif i == 1 and j == 1:
                 po[v_1].append(v_2)
-                return branching_algorithm(po, k-1, V_2)
+                return branching_algorithm(po, k-1, V_2, c)
             else:
+
                 return True
 
 
