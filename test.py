@@ -6,7 +6,7 @@ import algorithm
 
 #test cases here
 #-------------------------------------#
-class TestMinimise(unittest.TestCase):
+class Test(unittest.TestCase):
 
 	def test_minimise_1(self):
 		c = lambda k : k >= 15
@@ -17,6 +17,38 @@ class TestMinimise(unittest.TestCase):
 		c = lambda k : k >= 5
 		val = algorithm.minimise({},20, c);
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
+
+	def test_computeCross2X2Bipartite(self):
+		
+		c = {}
+		V_1 = [1,2]
+		V_2 = [3,4]
+		G = {}
+		G[1] = [4,3]
+		G[2] = [3,4]
+		G[3] = [2,1]
+		G[4] = [1,2]
+
+		algorithm.computeAllCrossings(c, G, V_2, V_1)
+		val = algorithm.getCrossings(3,4,c)
+		self.assertEqual(val, 1, "crossings returned: " + str(val))
+
+	def test_computeCross3X3Bipartite(self):
+		
+		c = {}
+		V_1 = [1,2,3]
+		V_2 = [4,5,6]
+		G = {}
+		G[1] = [4,5,6]
+		G[2] = [4,5,6]
+		G[3] = [4,5,6]
+		G[4] = [1,2,3]
+		G[5] = [1,2,3]
+		G[6] = [1,2,3]
+
+		algorithm.computeAllCrossings(c, G, V_2, V_1)
+		val = algorithm.getCrossings(4,6,c)
+		self.assertEqual(val, 3, "crossings returned: " + str(val))
 
 #add more here
 #-------------------------------------#

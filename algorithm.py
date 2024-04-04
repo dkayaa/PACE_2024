@@ -67,18 +67,51 @@ def writeOutput():
 	print("Not Implemented")
 	#set of orderings in V_2 and generate linear ordering to output
 
-#computes the number of crossings between {a,b} in V_2 assuming a < b
-def getCrossings(a,b):
+#gets the number of crossings between {a,b} in V_2 assuming a < b
+def getCrossings(a,b, c):
+	return c[a][b]
+
+#crossings are computed and stored in a dictionary of dictionaries
+#key :vertex A 
+#value : dictionary with key : vertex B, value : num crossings.
+def computeAllCrossings(c, G, V_2, V_1):
 	print("Not Implemented")
-	return 0
+	n = len(V_2)
+	#init 2d array storing crossings
+	#c[a][b] indicates the number of crossings for c_ab (ie assuming a<b in Poset)
+	for a in range(n):
+		c[V_2[a]] = {}
+		for b in range(n):
+			if(a == b):
+				c[V_2[a]][V_2[b]]= -1
+			else:
+				c[V_2[a]][V_2[b]]= 0
+	
+	for a1 in range(n): #vertex in V_2
+		for b1 in range (a, n): #vertex in V_2
+			if (a1 == b1):
+				continue
+			for a2 in G[V_2[a]]: #vertex in V_1 that has edge incident to a1 in V_2
+				for b2 in G[V_2[b]]: #vertex in V_1 that has edge incident to b1 in V_2
+					if(a2 == b2):
+						continue
+					a1_i = a1
+					b1_i = b1
+					a2_i = V_1.index(a2)
+					b2_i = V_1.index(b2)
+					if (a1_i < b1_i) and (b2_i < a2_i):
+						c[V_2[a1_i]][V_2[b1_i]]+=1
+					elif(b1_i < a1_i) and (a2_i < b2_i):
+						c[V_2[b1_i]][V_2[a1_i]]+=1
+			
 
 #Simplification Rules
 def RR1():
 	#any pair of vertices {a.b} in V_2 that form a 0/j pattern,
 	#commit a < b to the Poset. 
 	n = len(V_2)
-	for a in range(V_2):
-		for b in range (a, V_2):
+	for a in range(n):
+		for b in range (a, n):
 			if(a != b):
 				c_ab = getCrossings(V_2[a],V_2[b])
 				c_ba = getCrossings(V_2[b],V_2[a])
@@ -93,21 +126,12 @@ def RR2(k):
 	#commit a < b to Poset and do parameter accounting k = k - c_ab
 	
 	n = len(V_2)
-	for a in range(V_2):
-		for b in range (a, V_2):
+	for a in range(n):
+		for b in range (a, n):
 			if(a != b):
 				if graph_getClosedNeighbourhood(V_2[a]).remove(V_2[a]) == graph_getClosedNeighbourhood(V_2[b]).remove(V_2[b]):
 					po[a].insert(b)
 					k = k - getCrossings(V_2[a], V_2[b])
-
-def RRlarge():
-	print("Not Implemented")
-
-def RRL01():
-	print("Not Implemented")
-
-def RRL02():
-	print("Not Implemented")
 
 #takes in empty partial ordering, callback function that is the branching algorithm. 
 #executes branching algorithm in a binary search  manner to find k that is minimal. 
