@@ -68,7 +68,7 @@ def writeOutput():
 	#set of orderings in V_2 and generate linear ordering to output
 
 #computes the number of crossings between {a,b} in V_2 assuming a < b
-def computeCrossings(a,b):
+def getCrossings(a,b):
 	print("Not Implemented")
 	return 0
 
@@ -79,8 +79,8 @@ def RR1():
 	n = len(V_2)
 	for a in range(V_2):
 		for b in range (a, V_2):
-			c_ab = computeCrossings(V_2[a],V_2[b])
-			c_ba = computeCrossings(V_2[b],V_2[a])
+			c_ab = getCrossings(V_2[a],V_2[b])
+			c_ba = getCrossings(V_2[b],V_2[a])
 
 			if((c_ab == 0) and (c_ba > 0)): # commit a < b
 				po[a].insert(b)
@@ -96,7 +96,7 @@ def RR2(k):
 		for b in range (a, V_2):
 			if graph_getClosedNeighbourhood(V_2[a]).remove(V_2[a]) == graph_getClosedNeighbourhood(V_2[b]).remove(V_2[b]):
 				po[a].insert(b)
-				k = k - computeCrossings(V_2[a], V_2[b])
+				k = k - getCrossings(V_2[a], V_2[b])
 
 def RRlarge():
 	print("Not Implemented")
