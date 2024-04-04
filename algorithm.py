@@ -1,4 +1,27 @@
 
+#Graph representation
+graph = {}
+#dictionary 
+#key : vertex_id v
+#values : array of vertex_id u such that there exists an edge v,u in the graph 
+
+#Linear Ordering 
+#list of vertex_ids 
+#this is generated at the end
+lo = []
+
+#Set of Partial Orderings
+#dictionary 
+#key : vertex_id v 
+#value : array of vertex_id u such that v < u in the ordering. 
+po = {}
+
+#List storing Linear ordering of V_1
+V_1 = []
+
+#List storing vertices of V_2
+V_2 = []
+
 def readInput():
 	#function to read in stdin and populate graph object
 	#graph object: adjacency list 
@@ -24,6 +47,9 @@ def graph_deleteEdge():
 	#dict[v2].remove(v1)
 	print("Not Implemented")
 
+def graph_getClosedNeighbourhood(v):
+	print("Not Implemented")
+
 def execKernal():
 	#to execute our Simplification/Halting rules here. 
 	print("Not Implemented")
@@ -41,12 +67,36 @@ def writeOutput():
 	print("Not Implemented")
 	#set of orderings in V_2 and generate linear ordering to output
 
+#computes the number of crossings between {a,b} in V_2 assuming a < b
+def computeCrossings(a,b):
+	print("Not Implemented")
+	return 0
+
 #Simplification Rules
 def RR1():
-	print("Not Implemented")
+	#any pair of vertices {a.b} in V_2 that form a 0/j pattern,
+	#commit a < b to the Poset. 
+	n = len(V_2)
+	for a in range(V_2):
+		for b in range (a, V_2):
+			c_ab = computeCrossings(V_2[a],V_2[b])
+			c_ba = computeCrossings(V_2[b],V_2[a])
 
-def RR2():
-	print("Not Implemented")
+			if((c_ab == 0) and (c_ba > 0)): # commit a < b
+				po[a].insert(b)
+			elif((c_ba == 0) and (c_ab > 0)): # commit b < a
+				po[b].insert(a)	
+
+def RR2(k):
+	#any pair of vertices {a,b} in V_2 such that N(a)\{a} = N(b)\{b}
+	#commit a < b to Poset and do parameter accounting k = k - c_ab
+	
+	n = len(V_2)
+	for a in range(V_2):
+		for b in range (a, V_2):
+			if graph_getClosedNeighbourhood(V_2[a]).remove(V_2[a]) == graph_getClosedNeighbourhood(V_2[b]).remove(V_2[b]):
+				po[a].insert(b)
+				k = k - computeCrossings(V_2[a], V_2[b])
 
 def RRlarge():
 	print("Not Implemented")
@@ -82,21 +132,3 @@ def minimise(po, k_max, cb = None):
 
 		#left is maximal value that returns false
 		return left + 1
-
-
-#Graph representation
-graph = {}
-#dictionary 
-#key : vertex_id v
-#values : array of vertex_id u such that there exists an edge v,u in the graph 
-
-#Linear Ordering 
-#list of vertex_ids 
-#this is generated at the end
-lo = []
-
-#Set of Partial Orderings
-#dictionary 
-#key : vertex_id v 
-#value : array of vertex_id u such that v < u in the ordering. 
-po = {}
