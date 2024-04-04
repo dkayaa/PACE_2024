@@ -51,8 +51,8 @@ def RRlarge(po, k, V_2):
 
 
 def branching_algorithm(po, k, V_2):
-    prevK = k
-    prevSize = len(V_2)
+    prevK = -1
+    prevSize = -1
     while prevK != k or prevSize != len(V_2):
         
         prevK = k
