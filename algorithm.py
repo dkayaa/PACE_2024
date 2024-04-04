@@ -79,13 +79,14 @@ def RR1():
 	n = len(V_2)
 	for a in range(V_2):
 		for b in range (a, V_2):
-			c_ab = getCrossings(V_2[a],V_2[b])
-			c_ba = getCrossings(V_2[b],V_2[a])
+			if(a != b):
+				c_ab = getCrossings(V_2[a],V_2[b])
+				c_ba = getCrossings(V_2[b],V_2[a])
 
-			if((c_ab == 0) and (c_ba > 0)): # commit a < b
-				po[a].insert(b)
-			elif((c_ba == 0) and (c_ab > 0)): # commit b < a
-				po[b].insert(a)	
+				if((c_ab == 0) and (c_ba > 0)): # commit a < b
+					po[a].insert(b)
+				elif((c_ba == 0) and (c_ab > 0)): # commit b < a
+					po[b].insert(a)	
 
 def RR2(k):
 	#any pair of vertices {a,b} in V_2 such that N(a)\{a} = N(b)\{b}
@@ -94,9 +95,10 @@ def RR2(k):
 	n = len(V_2)
 	for a in range(V_2):
 		for b in range (a, V_2):
-			if graph_getClosedNeighbourhood(V_2[a]).remove(V_2[a]) == graph_getClosedNeighbourhood(V_2[b]).remove(V_2[b]):
-				po[a].insert(b)
-				k = k - getCrossings(V_2[a], V_2[b])
+			if(a != b):
+				if graph_getClosedNeighbourhood(V_2[a]).remove(V_2[a]) == graph_getClosedNeighbourhood(V_2[b]).remove(V_2[b]):
+					po[a].insert(b)
+					k = k - getCrossings(V_2[a], V_2[b])
 
 def RRlarge():
 	print("Not Implemented")
