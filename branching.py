@@ -1,4 +1,3 @@
-
 from algorithm import getCrossings
 
 def RRLO1(po, k, V_2):
