@@ -71,11 +71,12 @@ class Test(unittest.TestCase):
 
 		algorithm.computeAllCrossings(c, G, V_2, V_1)
 		val = algorithm.getCrossings(4,6,c)
-		self.assertEqual(val, 3, "crossings returned: " + str(val))
-
+		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
+		
+	
 	def test_branching2X2Bipartite(self):
 		c = {}
-		pos = {0:[], 1:[]}
+		pos = {3:[], 4:[]}
 		V_1 = [1,2]
 		V_2 = [3,4]
 		G = {}
@@ -90,11 +91,28 @@ class Test(unittest.TestCase):
 		self.assertEqual(val, False, "The is a " + str(val) + " instance")
 		val = branching.branching_algorithm(pos, 1, V_2, c)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
-
-	def test_computeCross3X3Bipartite(self):
+	
+	def test_branching2XP2(self):
+		c = {3:{4:0}, 4:{3:1}}
+		pos = {3:[], 4:[]}
+		V_1 = [1,2]
+		V_2 = [3,4]
+		G = {}
+		G[1] = [3]
+		G[2] = [4]
+		G[3] = [1]
+		G[4] = [2]
 		
-		c = {}
-		pos = {0:[], 1:[], 2:[]}
+		val = branching.branching_algorithm(pos, 0, V_2, c)
+		self.assertEqual(val, True, "The is a " + str(val) + " instance")
+		
+	
+	
+	def test_branching3X3Bipartite(self):
+		
+		c = {4:{5:3, 6:3}, 5:{4:3, 6:3}, 6:{4:3, 5:3}}
+		
+		pos = {4:[], 5:[], 6:[]}
 		V_1 = [1,2,3]
 		V_2 = [4,5,6]
 		G = {}
@@ -104,13 +122,11 @@ class Test(unittest.TestCase):
 		G[4] = [1,2,3]
 		G[5] = [1,2,3]
 		G[6] = [1,2,3]
-
-		algorithm.computeAllCrossings(c, G, V_2, V_1)
+		
 		val = branching.branching_algorithm(pos, 8, V_2, c)
 		self.assertEqual(val, False, "The is a " + str(val) + " instance")
 		val = branching.branching_algorithm(pos, 9, V_2, c)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
-
 
 #add more here
 #-------------------------------------#
