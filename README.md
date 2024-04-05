@@ -20,3 +20,9 @@ Generate output (linear order) -> Erika
 
 Kernal and Simplification Rules -> ??? 
 
+# Prequistes
+
+Install z3 and its python library via package manager or pip:
+```
+pip3 install z3
+```

@@ -130,6 +130,18 @@ class Test(unittest.TestCase):
 		val = branching.branching_algorithm(pos, 9, V_2, c)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
 
+	def test_linearOrder_1(self):
+		po = {
+			0: {1, 2},
+			1: {3, 4},
+	  		3: {5}
+			}
+
+		V_2 = [0, 1, 2, 3, 4, 5, 6]
+
+		result = algorithm.writeOutput(V_2, po)
+		self.assertEqual(result, [0, 1, 3, 6, 5, 4, 2])
+
 #add more here
 #-------------------------------------#
 	

@@ -1,3 +1,4 @@
+from z3 import Solver, Int
 
 #Graph representation
 graph = {}
@@ -63,9 +64,55 @@ def execAlgorithm1():
 def execAlgorithm2():
 	print("Not Implemented")
 
-def writeOutput(): 
-	print("Not Implemented")
-	#set of orderings in V_2 and generate linear ordering to output
+def writeOutput(V_2_set, partial_order): 
+	"""Set of orderings in V_2 and generate linear ordering to output."""
+	"""V_2: the V_2 vertexes set, po: the partial order relation"""
+	solver = Solver()
+	z3_int_list = {}
+	linear_order = []
+
+	# Build the order relationship
+	for p1 in V_2_set:
+		if not (p1 in partial_order.keys()):
+			z3_int_list[p1] = Int(p1)
+			# give a random position for those with no relation
+			solver.add(z3_int_list[p1] == 0)
+			continue
+
+		for p2 in partial_order[p1]:
+			if not (p1 in z3_int_list.keys()):
+				z3_int_list[p1] = Int(p1)
+			if not (p2 in z3_int_list.keys()):
+				z3_int_list[p2] = Int(p2)
+			
+			p1_int = z3_int_list[p1]
+			p2_int = z3_int_list[p2]
+
+			solver.add(p1_int < p2_int)
+
+	# Solve the relationship in z3
+	solver.check()
+	result = solver.model()
+
+	# Convert the relationship to a linear order that satisfying the order relation
+	for v in V_2_set:
+		insert_position = 0
+
+		for i in linear_order:
+			i_int = z3_int_list[i]
+			v_int = z3_int_list[v]
+			i_order = result[i_int].as_long()
+			v_order = result[v_int].as_long()
+			if (i_order < v_order):
+				insert_position += 1
+			else:
+				break
+		
+		linear_order.insert(insert_position, v)
+
+	# They should have same length after all the operations
+	assert(len(linear_order) == len(V_2_set))
+	return linear_order
 
 #gets the number of crossings between {a,b} in V_2 assuming a < b
 def getCrossings(a, b, c):
