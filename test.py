@@ -72,6 +72,8 @@ class Test(unittest.TestCase):
 		algorithm.computeAllCrossings(c, G, V_2, V_1)
 		val = algorithm.getCrossings(4,6,c)
 		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
+		val = algorithm.getCrossings(4,5,c)
+		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
 		
 	
 	def test_branching2X2Bipartite(self):
