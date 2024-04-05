@@ -24,5 +24,5 @@ Kernal and Simplification Rules -> ???
 
 Install z3 and its python library via package manager or pip:
 ```
-pip3 install z3
+pip install z3-solver
 ```
