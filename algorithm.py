@@ -1,3 +1,4 @@
+from graphlib import TopologicalSorter
 
 #Graph representation
 graph = {}
@@ -102,9 +103,21 @@ def execAlgorithm1():
 def execAlgorithm2():
     print("Not Implemented")
 
-def writeOutput(): 
-    print("Not Implemented")
-    #set of orderings in V_2 and generate linear ordering to output
+def writeOutput(V_2_set, partial_order): 
+	"""Set of orderings in V_2 and generate linear ordering to output."""
+	"""V_2: the V_2 vertexes set, po: the partial order relation"""
+	# Add the remaining keys
+	for p1 in V_2_set:
+		if not (p1 in partial_order.keys()):
+			partial_order[p1] = {}
+
+	# Finding a linear extension from partial order is equivalent to topological sort
+    # https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders
+	linear_order = list(TopologicalSorter(partial_order).static_order())
+
+	# We need to reverse it because the default relation is >, but ours are <
+	linear_order.reverse()
+	return linear_order
 
 #gets the number of crossings between {a,b} in V_2 assuming a < b
 def getCrossings(a, b, c):

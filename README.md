@@ -19,4 +19,3 @@ Branching Algorithm -> Sank
 Generate output (linear order) -> Erika
 
 Kernal and Simplification Rules -> ??? 
-
