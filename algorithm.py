@@ -139,7 +139,7 @@ def computeAllCrossings(c, G, V_2, V_1):
                 c[V_2[a]][V_2[b]]= 0
     
     for a1 in range(n): #vertex in V_2
-        for b1 in range (a, n): #vertex in V_2
+        for b1 in range (a1, n): #vertex in V_2
             if (a1 == b1):
                 continue
             for a2 in G[V_2[a1]]: #vertex in V_1 that has edge incident to a1 in V_2
