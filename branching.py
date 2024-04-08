@@ -20,10 +20,10 @@ def branching_algorithm(po, k, V_2, c):
 			if comparable:
 				V_2.pop(a)
 				po.pop(V_2[a], None)
-				for c in range(V_2):
-					if a == c:
+				for e in range(V_2):
+					if a == e:
 						continue
-					po[V_2[c]].remove(V_2[a])
+					po[V_2[e]].remove(V_2[a])
 		
 		# RRL02
 		for a in range(len(V_2)):
