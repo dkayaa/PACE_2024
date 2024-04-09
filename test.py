@@ -4,19 +4,20 @@
 import unittest 
 import algorithm
 import branching
+import helper
 
 #test cases here
 #-------------------------------------#
 class Test(unittest.TestCase):
 
 	def test_minimise_1(self):
-		c = lambda k : k >= 15
-		val = algorithm.minimise({},20, c);
+		c = lambda k, i , o : k >= 15
+		val = algorithm.minimise(20, c);
 		self.assertEqual(val, 15, "minimise returned: " + str(val))
 
 	def test_minimise_2(self):
-		c = lambda k : k >= 5
-		val = algorithm.minimise({},20, c);
+		c = lambda k, i , o : k >= 5
+		val = algorithm.minimise(20, c);
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
 
 	def test_computeCross2X2Bipartite(self):
@@ -30,8 +31,8 @@ class Test(unittest.TestCase):
 		G[3] = [2,1]
 		G[4] = [1,2]
 
-		algorithm.computeAllCrossings(c, G, V_2, V_1)
-		val = algorithm.getCrossings(3,4,c)
+		helper.computeAllCrossings(c, G, V_2, V_1)
+		val = helper.getCrossings(3,4,c)
 		self.assertEqual(val, 1, "crossings returned: " + str(val))
 
 	def test_computeCross2XP2(self):
@@ -49,10 +50,10 @@ class Test(unittest.TestCase):
 		G[3] = [1]
 		G[4] = [2]
 
-		algorithm.computeAllCrossings(c, G, V_2, V_1)
-		val = algorithm.getCrossings(3,4,c)
+		helper.computeAllCrossings(c, G, V_2, V_1)
+		val = helper.getCrossings(3,4,c)
 		self.assertEqual(val, 0, "crossings returned: " + str(val))
-		val = algorithm.getCrossings(4,3,c)
+		val = helper.getCrossings(4,3,c)
 		self.assertEqual(val, 1, "crossings returned: " + str(val))
 
 
@@ -69,14 +70,14 @@ class Test(unittest.TestCase):
 		G[5] = [1,2,3]
 		G[6] = [1,2,3]
 
-		algorithm.computeAllCrossings(c, G, V_2, V_1)
-		val = algorithm.getCrossings(4,6,c)
+		helper.computeAllCrossings(c, G, V_2, V_1)
+		val = helper.getCrossings(4,6,c)
 		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
-		val = algorithm.getCrossings(4,5,c)
+		val = helper.getCrossings(4,5,c)
 		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
-		val = algorithm.getCrossings(6,4,c)
+		val = helper.getCrossings(6,4,c)
 		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
-		val = algorithm.getCrossings(5,4,c)
+		val = helper.getCrossings(5,4,c)
 		self.assertEqual(val, 3, "crossings returned: " + str(val)) 
 				
 	
@@ -91,7 +92,7 @@ class Test(unittest.TestCase):
 		G[3] = [2,1]
 		G[4] = [1,2]
 
-		algorithm.computeAllCrossings(c, G, V_2, V_1)
+		helper.computeAllCrossings(c, G, V_2, V_1)
 		
 		val = branching.branching_algorithm(pos, 0, V_2, c)
 		self.assertEqual(val, False, "The is a " + str(val) + " instance")
@@ -143,7 +144,7 @@ class Test(unittest.TestCase):
 
 		V_2 = [0, 1, 2, 3, 4, 5, 6]
 
-		result = algorithm.writeOutput(V_2, po)
+		result = helper.writeOutput(V_2, po)
 		self.assertEqual(result, [0, 1, 3, 6, 5, 4, 2])
 
 #add more here

@@ -1,4 +1,4 @@
-from algorithm import getCrossings
+from helper import getCrossings
 import copy
 def branching_algorithm(po, k, V_2, c):
 	prevK = -1
