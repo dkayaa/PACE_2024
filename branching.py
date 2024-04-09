@@ -68,7 +68,7 @@ def branching_algorithm(po, k, V_2, c):
 				po1[V_2[v_1]].append(V_2[v_2])
 				po[V_2[v_2]].append(V_2[v_1])
 				return branching_algorithm(po, k - i,V_2, c) or branching_algorithm(po1, k-j,V_2, c)
-			elif (i == 1 and j == 2) or (i == 2 and j == 1) and isDependent(po, V_2[v_1],V_2[v_2]):
+			elif (i == 1 and j == 2) or (i == 2 and j == 1) and isDependent(po, V_2[v_1],V_2[v_2], V_2):
 				po1 = copy.deepcopy(po)
 				po1[V_2[v_1]].append(V_2[v_2])
 				po[V_2[v_2]].append(V_2[v_1])
