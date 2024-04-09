@@ -162,4 +162,7 @@ def computeAllCrossings(c, G, V_2, V_1):
 						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing    
 			
 def insertPartialOrdering(po, a, b):
-	
+	if a not in po.keys():
+		po[a] = []
+	if b not in po[a]:
+		po[a].append(b)

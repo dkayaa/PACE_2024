@@ -147,6 +147,31 @@ class Test(unittest.TestCase):
 		result = helper.writeOutput(V_2, po)
 		self.assertEqual(result, [0, 1, 3, 6, 5, 4, 2])
 
+
+	def test_insertPO1(self):
+		po = {}
+		helper.insertPartialOrdering(po, 1, 2)
+		expected = {1:[2]}
+		self.assertEqual(po, expected, "failed: " + str(po))
+
+	def test_insertPO2(self):
+		po = {1:[]}
+		helper.insertPartialOrdering(po, 1, 2)
+		expected = {1:[2]}
+		self.assertEqual(po, expected, "failed: " + str(po))
+
+	def test_insertPO3(self):
+		po = {1:[2]}
+		helper.insertPartialOrdering(po, 1, 2)
+		expected = {1:[2]}
+		self.assertEqual(po, expected, "failed: " + str(po))
+
+
+	def test_insertPO4(self):
+		po = {2:[10]}
+		helper.insertPartialOrdering(po, 1, 2)
+		expected = {2:[10], 1:[2]}
+		self.assertEqual(po, expected, "failed: " + str(po))
 #add more here
 #-------------------------------------#
 	
