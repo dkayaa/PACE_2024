@@ -11,12 +11,13 @@ def RR1(po, V_2, c):
 		for b in range (a, n):
 			if(a != b):
 				c_ab = helper.getCrossings(V_2[a],V_2[b], c)
-				c_ba = helper.getCrossings(V_2[b],V_2[a], c)
-
+				c_ba = helper.getCrossings(V_2[b],V_2[a], c)			
 				if((c_ab == 0) and (c_ba > 0)): # commit a < b
-					po[V_2[a]].append(V_2[b])
+					helper.insertPartialOrdering(po, V_2[a], V_2[b])
+					#po[V_2[a]].append(V_2[b])
 				elif((c_ba == 0) and (c_ab > 0)): # commit b < a
-					po[V_2[b]].append(V_2[a])
+					helper.insertPartialOrdering(po, V_2[b], V_2[a])
+					#po[V_2[b]].append(V_2[a])
 
 def RR2(k, po, V_2, G, c):
 	#any pair of vertices {a,b} in V_2 such that N(a)\{a} = N(b)\{b}
@@ -26,8 +27,13 @@ def RR2(k, po, V_2, G, c):
 	for a in range(n):
 		for b in range (a, n):
 			if(a != b):
-				if helper.graph_getClosedNeighbourhood(V_2[a], G).remove(V_2[a]) == helper.graph_getClosedNeighbourhood(V_2[b], G).remove(V_2[b]):
-					po[V_2[a]].append(V_2[b])
+				cnb_a = helper.graph_getClosedNeighbourhood(V_2[a], G)
+				cnb_b = helper.graph_getClosedNeighbourhood(V_2[b], G)
+				cnb_a.remove(V_2[a])
+				cnb_b.remove(V_2[b])
+				if cnb_a == cnb_b :
+					#po[V_2[a]].append(V_2[b])
+					helper.insertPartialOrdering(po, V_2[a], V_2[b])
 					k = k - helper.getCrossings(V_2[a], V_2[b], c)
 	return k
 
@@ -97,4 +103,4 @@ def main():
 		print(v)
 
 #execute
-#main()
+main()
