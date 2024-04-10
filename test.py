@@ -6,6 +6,14 @@ import algorithm
 import branching
 import helper
 
+def myfunc(k, i, o):
+	i.clear()
+	if k > 5:
+		o[1] = []
+		o[1].append(1)
+		return True
+	return False
+
 #test cases here
 #-------------------------------------#
 class Test(unittest.TestCase):
@@ -17,8 +25,19 @@ class Test(unittest.TestCase):
 
 	def test_minimise_2(self):
 		c = lambda k, i , o : k >= 5
-		val = algorithm.minimise(20, c);
+		val = algorithm.minimise(20, c)
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
+
+	def test_minimise_3(self):
+		o = {}
+		i = {10:[10]}
+		c = lambda k, i , o : k >= 5
+		val = algorithm.minimise(20, c)
+		self.assertEqual(val, 5, "minimise returned: " + str(val))
+		self.assertEqual(i, {10:[10]}, "input not equal: " + str(o))
+		myfunc(val,i,o)
+		self.assertEqual(o, {}, "output not equal: " + str(o))
+
 
 	def test_computeCross2X2Bipartite(self):
 		
@@ -166,12 +185,29 @@ class Test(unittest.TestCase):
 		expected = {1:[2]}
 		self.assertEqual(po, expected, "failed: " + str(po))
 
-
 	def test_insertPO4(self):
 		po = {2:[10]}
 		helper.insertPartialOrdering(po, 1, 2)
 		expected = {2:[10], 1:[2]}
 		self.assertEqual(po, expected, "failed: " + str(po))
+
+	#if 1 < 2 and commit 3 < 1, then 3 < 2 committed by transitivity
+	def test_commitPO1(self):
+		c = {1: {2: 0, 3:0}, 2: {1: 0, 3:0}, 3: {1:0, 2:10}}
+		po = {1: [2], 2:[], 3:[]}
+		k = 0
+		k = helper.commitPartialOrdering(po, 3, 1, k, c)
+		self.assertEqual(k, -10, "incorrect")
+
+	#if 1 < 2 and commit  2 < 3 then 1 < 3 committed by transitivity
+	def test_commitPO2(self):
+		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
+		po = {1: [2], 2:[], 3:[]}
+		k = 0
+		k = helper.commitPartialOrdering(po, 2, 3, k, c)
+		self.assertEqual(k, -7, "incorrect")
+		self.assertEqual(po, {1: [2,3], 2:[3], 3:[]},"incorrect")
+
 #add more here
 #-------------------------------------#
 	

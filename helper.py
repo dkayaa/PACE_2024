@@ -166,3 +166,36 @@ def insertPartialOrdering(po, a, b):
 		po[a] = []
 	if b not in po[a]:
 		po[a].append(b)
+
+def commitPartialOrdering(po, a, b, k, c):
+	#commits to partial order and does parameter accounting. 
+	#parameter accounting
+	#committing a < b to Poset.
+	#reduce k by c_ab but also by c_cd for each pair {c,d} that  is 
+	#committed due to transitivity 
+	
+	if b in po[a]:
+		return k
+
+	#first calculate k = k - c_ab
+	k = k - getCrossings(a, b, c)
+	insertPartialOrdering(po, a, b)
+
+	#for any x such that b < x. commit a < x and do param accounting
+	for x in po[b]:
+		# k = k - getCrossings(a, x, c)
+		#insertPartialOrdering(po, a, x)
+		k = commitPartialOrdering(po,a, x, k, c)
+	
+	#for any y such that y < a. commit y < b and do param accounting 
+	for y in po.keys():
+		if y == a:
+			continue
+		for x in po[y]:
+			if x != a:
+				continue
+			#k = k - getCrossings(y, b, c)
+			#insertPartialOrdering(po, y, b)
+			k = commitPartialOrdering(po, y, b, k, c)
+			break
+	return k
