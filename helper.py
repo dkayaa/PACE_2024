@@ -173,6 +173,8 @@ def commitPartialOrdering(po, a, b, k, c):
 	#committing a < b to Poset.
 	#reduce k by c_ab but also by c_cd for each pair {c,d} that  is 
 	#committed due to transitivity 
+	if a == b:
+		return k
 	
 	if b in po[a]:
 		return k

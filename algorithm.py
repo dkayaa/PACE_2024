@@ -3,6 +3,7 @@ from branching import branching_algorithm, incomparable, RRL01, RRL02, RRlarge
 
 import helper
 import copy
+from bruteforce import BruteForce
 
 #Simplification Rules
 def RR1(po, V_2, c, k):
@@ -127,6 +128,26 @@ def Algorithm1 (k, input, output):
 	r = branching_algorithm(output, k, V_2, c)
 	return r
 
+def isTransitiveWrtX(po, a, b, x):
+	#if {a,x} xor {b,x} is comparable (but not both)
+	comparableAX = False
+	comparableBX = False
+	comparableAX = not incomparable(po, a, x)
+	comparableBX = not incomparable(po, b, x)
+
+	comparable = False 
+	comparable = (comparableAX and not comparableBX) or (not comparableAX and comparableBX)
+
+	return comparable 
+
+def isTransitive(po, a, b, V_2):
+	for vertex in V_2:
+		if a == vertex or b == vertex:
+			continue
+		if isTransitiveWrtX(po, a, b, vertex):
+			return True
+	return False
+
 #main 
 def main():
 	if len(sys.argv) == 0: 
@@ -136,8 +157,12 @@ def main():
 	#input = (G, V_1, V_2)
 	input = helper.readInput(sys.argv[1])
 	V_2 = input[2]
-
-	k_max = 20 #<=== need to fix this once validated branching 
+	V_1 = input[1]
+	
+	#k_max = 20 #<=== need to fix this once validated branching 
+	n = len(V_2)
+	m = len(V_1)
+	k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
 	po = {}
 
 	k = minimise(k_max, Algorithm1, input, po)
@@ -145,6 +170,7 @@ def main():
 	out = helper.writeOutput(V_2, po)
 	for v in out:
 		print(v)
-		
+
+
 #execute
 main()
