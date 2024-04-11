@@ -186,14 +186,16 @@ def commitPartialOrdering(po, a, b, k, c, V_2):
 	#first calculate k = k - c_ab
 	k = k - getCrossings(a, b, c)
 	insertPartialOrdering(po, a, b)
-
+	if k < 0:
+		return k
 	#for any x such that b < x. commit a < x and do param accounting
 	for x in po[b]:
 		# k = k - getCrossings(a, x, c)
 		#insertPartialOrdering(po, a, x)
 		#if isTransitive(po, a, x, V_2):
-		k = commitPartialOrdering(po,a, x, k, c, V_2)
-		if k == -1:
+		if x not in po[a]:
+			k = commitPartialOrdering(po,a, x, k, c, V_2)
+		if k < 0:
 			return k
 	
 	#for any y such that y < a. commit y < b and do param accounting 
@@ -205,7 +207,7 @@ def commitPartialOrdering(po, a, b, k, c, V_2):
 			#insertPartialOrdering(po, y, b)
 			#if isTransitive(po, y, b, V_2):
 			k = commitPartialOrdering(po, y, b, k, c, V_2)
-			if k == -1:
+			if k < 0:
 				return k
 	return k
 

@@ -6,6 +6,7 @@ import copy
 from bruteforce import BruteForce
 
 #Simplification Rules
+
 def RR1(po, V_2, c, k):
 	#any pair of vertices {a.b} in V_2 that form a 0/j pattern,
 	#commit a < b to the Poset. 
@@ -23,6 +24,12 @@ def RR1(po, V_2, c, k):
 				elif((c_ba == 0) and (c_ab > 0)): # commit b < a
 					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
 					#po[V_2[b]].append(V_2[a])
+				if c_ab == 0 and c_ba == 0:
+					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
+				if k < 0:
+					return k
+
+	 		
 	return k
 
 def RR2(k, po, V_2, G, c):
@@ -42,6 +49,8 @@ def RR2(k, po, V_2, G, c):
 				if cnb_a == cnb_b :
 					#po[V_2[a]].append(V_2[b])
 					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)
+				if k < 0:
+					return k
 	return k
 
 def RR3(k, po, V_2, c):
@@ -55,7 +64,9 @@ def RR3(k, po, V_2, c):
 			c_ab = helper.getCrossings(V_2[a], V_2[b], c)
 			c_ba = helper.getCrossings(V_2[b], V_2[a], c)
 			if (c_ab == 1) and (c_ba == 2):
-				helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)	
+				k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)	
+			if k < 0:
+				return k
 	return k
 
 
@@ -113,6 +124,8 @@ def minimise(cb = None, input = None, output = None):
 	#right = k_max
 	input2 = copy.deepcopy(input)
 	if cb:
+		if cb(0, input2, output) == True:
+			return 0
 		m = 1 #first find maximal m 
 		while not cb(m, input2, output):
 			output.clear()
@@ -131,6 +144,8 @@ def minimise(cb = None, input = None, output = None):
 
 			output.clear()
 		
+		
+
 		#i = 0
 		#input2 = copy.deepcopy(input)
 		#while not cb(i, input2, output):
@@ -148,7 +163,9 @@ def Kernalize(G, V_2, po, k, c):
 	prevK = -1
 	while prevK != k: 
 		prevK = k
+		#print("got here")
 		k = RR1(po, V_2, c, k)
+		#print("got here")
 		k = RR2(k, po, V_2, G, c)
 
 	#apply RRL01 RRL02 and RRlarge exhaustivaly 
@@ -166,19 +183,23 @@ def Algorithm1 (k, input, output):
 	G = input[0]
 	V_1 = input[1]
 	V_2 = input[2]
-	c = {}
+	c = input[3]
 	for key in G.keys():
 		output[key] = []
-	helper.computeAllCrossings(c, G, V_2, V_1)
+	
 
 
 
 	k = Kernalize(G, V_2, output, k, c)
+	if k < 0:
+		return False
 	#apply RR3 exhaustively
 	prevK = -1
 	while prevK != k:
 		prevK = k
 		k = RR3(k, output, V_2, c)
+		if k < 0:
+			return False
 
 	r = branching_algorithm(output, k, V_2, c)
 	return r
@@ -193,6 +214,10 @@ def main():
 	input = helper.readInput(sys.argv[1])
 	V_2 = input[2]
 	V_1 = input[1]
+	G = input[0]
+	c = {}
+	helper.computeAllCrossings(c, G, V_2, V_1)
+	input2 = (G, V_1, V_2, c)
 	
 	#k_max = 20 #<=== need to fix this once validated branching 
 	n = len(V_2)
@@ -200,8 +225,8 @@ def main():
 	k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
 	po = {}
 
-	k = minimise( Algorithm1, input, po)
-	Algorithm1(k, input, po)
+	k = minimise(BruteForce, input2, po)
+	BruteForce(k, input2, po)
 	out = helper.writeOutput(V_2, po)
 	for v in out:
 		print(v)

@@ -31,6 +31,8 @@ def RRL02(po, V_2, c, k):
 				else:
 					#po[V_2[b]].append(V_2[a])
 					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
+				if k < 0:
+					return k
 	return k
 
 def RRlarge(po, V_2, c, k):
@@ -112,7 +114,8 @@ def branching_algorithm(po, k, V_2, c):
 		#			k -= i
 		#			#po[V_2[a]].append(V_2[b])
 		#			helper.insertPartialOrdering(po, V_2[a], V_2[b])
-  
+		if k < 0: 
+			return False
 	if (k < 0):
 		po.clear()
 		po.update(po_original)
