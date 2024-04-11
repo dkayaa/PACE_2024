@@ -1,0 +1,72 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Python Debugger: Current Complete 4 x 5",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/complete_4_5.gr"]
+		},
+		{
+			"name": "Python Debugger: Current Website_20",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/website_20.gr"]
+		},
+		{
+			"name": "Python Debugger: Current Grid_9_shuffled",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/grid_9_shuffled.gr"]
+		},
+		{
+			"name": "Python Debugger: Current star_6",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/star_6.gr"]
+		},
+		{
+			"name": "Python Debugger: Current cycle_8_sorted",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/cycle_8_sorted.gr"]
+		},
+		{
+			"name": "Python Debugger: Current cycle_8_shuffled",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./tiny_test_set/cycle_8_shuffled.gr"]
+		},
+		{
+			"name": "Python Debugger: Current medium -11",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./medium_test_set/instances/11.gr"]
+		},
+		{
+			"name": "Python Debugger: Current medium -1",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./medium_test_set/instances/1.gr"]
+		}
+	]
+}
