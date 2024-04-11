@@ -1,6 +1,6 @@
 import helper
 import copy 
-from branching import incomparable
+from helper import incomparable
 
 def BruteForce (k, input, output):
 	#unpack inputs

@@ -196,7 +196,7 @@ class Test(unittest.TestCase):
 		c = {1: {2: 0, 3:0}, 2: {1: 0, 3:0}, 3: {1:0, 2:10}}
 		po = {1: [2], 2:[], 3:[]}
 		k = 0
-		k = helper.commitPartialOrdering(po, 3, 1, k, c)
+		k = helper.commitPartialOrdering(po, 3, 1, k, c, [1, 2, 3])
 		self.assertEqual(k, -10, "incorrect")
 
 	#if 1 < 2 and commit  2 < 3 then 1 < 3 committed by transitivity
@@ -204,9 +204,29 @@ class Test(unittest.TestCase):
 		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
 		po = {1: [2], 2:[], 3:[]}
 		k = 0
-		k = helper.commitPartialOrdering(po, 2, 3, k, c)
+		k = helper.commitPartialOrdering(po, 2, 3, k, c, [1, 2, 3])
 		self.assertEqual(k, -7, "incorrect")
 		self.assertEqual(po, {1: [2,3], 2:[3], 3:[]},"incorrect")
+
+	def test_isTransitive1(self):
+		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
+		po = {1: [3], 2:[], 3:[2]}
+		# 1 < 3 and 3 < 2
+		# a < c and c < b
+		# are {a, b} transitive?
+		# exists c such that {a,c} are comp or {b,c} are comp but not both
+		r = helper.isTransitive(po, 1, 2, [1, 2, 3])
+		self.assertEqual(r, False, "incorrect")	
+
+	def test_isTransitive2(self):
+		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
+		po = {1: [3], 2:[], 3:[]}
+		# 1 < 3 and 3 < 2
+		# a < c and c < b
+		# are {a, b} transitive?
+		# exists c such that {a,c} are comp or {b,c} are comp but not both
+		r = helper.isTransitive(po, 1, 2, [1, 2, 3])
+		self.assertEqual(r, True, "incorrect")	
 
 #add more here
 #-------------------------------------#

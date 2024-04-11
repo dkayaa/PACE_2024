@@ -167,15 +167,19 @@ def insertPartialOrdering(po, a, b):
 	if b not in po[a]:
 		po[a].append(b)
 
-def commitPartialOrdering(po, a, b, k, c):
+def commitPartialOrdering(po, a, b, k, c, V_2):
 	#commits to partial order and does parameter accounting. 
 	#parameter accounting
-	#committing a < b to Poset.
+	#committing a < b to Poset. but b < a
 	#reduce k by c_ab but also by c_cd for each pair {c,d} that  is 
 	#committed due to transitivity 
+	#po[a].append(b)
 	if a == b:
 		return k
 	
+	if a in po[b]:
+		return -1 
+
 	if b in po[a]:
 		return k
 
@@ -187,17 +191,55 @@ def commitPartialOrdering(po, a, b, k, c):
 	for x in po[b]:
 		# k = k - getCrossings(a, x, c)
 		#insertPartialOrdering(po, a, x)
-		k = commitPartialOrdering(po,a, x, k, c)
+		#if isTransitive(po, a, x, V_2):
+		k = commitPartialOrdering(po,a, x, k, c, V_2)
+		if k == -1:
+			return k
 	
 	#for any y such that y < a. commit y < b and do param accounting 
 	for y in po.keys():
 		if y == a:
 			continue
-		for x in po[y]:
-			if x != a:
-				continue
+		if a in po[y]:
 			#k = k - getCrossings(y, b, c)
 			#insertPartialOrdering(po, y, b)
-			k = commitPartialOrdering(po, y, b, k, c)
-			break
+			#if isTransitive(po, y, b, V_2):
+			k = commitPartialOrdering(po, y, b, k, c, V_2)
+			if k == -1:
+				return k
 	return k
+
+def isTransitiveWrtX(po, a, b, x):
+	#if {a,x} xor {b,x} is comparable (but not both)
+	comparableAX = False
+	comparableBX = False
+	comparableAX = not incomparable(po, a, x)
+	comparableBX = not incomparable(po, b, x)
+
+	comparable = False 
+	comparable = (comparableAX and not comparableBX) or (not comparableAX and comparableBX)
+
+	return comparable 
+
+def isTransitive(po, a, b, V_2):
+	for vertex in V_2:
+		if a == vertex or b == vertex:
+			continue
+		if isTransitiveWrtX(po, a, b, vertex):
+			return True
+	return False
+
+# Checks if two vertices are comparable 
+def incomparable(po, a, b):
+	if (b not in po[a]) and (a not in po[b]):
+		return True
+	return False
+
+# Checks if two vertices are dependent on any vertices
+def isDependent(po, a, b, V_2):
+	for vertex in V_2:
+		if a == vertex or b == vertex:
+			continue
+		if incomparable(po, a, vertex) or incomparable(po, b, vertex):
+			return True
+	return False

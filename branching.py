@@ -1,4 +1,4 @@
-from helper import getCrossings
+from helper import getCrossings, incomparable, isDependent
 import copy	
 import helper
 
@@ -26,11 +26,11 @@ def RRL02(po, V_2, c, k):
 				i = getCrossings(V_2[a], V_2[b], c)
 				j = getCrossings(V_2[b], V_2[a], c)
 				if (i <= j):
-					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c)
+					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)
 					#po[V_2[a]].append(V_2[b])
 				else:
 					#po[V_2[b]].append(V_2[a])
-					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c)
+					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
 	return k
 
 def RRlarge(po, V_2, c, k):
@@ -38,16 +38,16 @@ def RRlarge(po, V_2, c, k):
 		for b in range(a + 1, len(V_2)):
 			if not incomparable(po,V_2[a],V_2[b]):
 				continue
-			i = getCrossings(V_2[a], V_2[b], c)
-			j = getCrossings(V_2[b], V_2[a], c)
+			i = getCrossings(V_2[a], V_2[b], c) #cab
+			j = getCrossings(V_2[b], V_2[a], c) #cba
 			if i > k and j > k:
-				return False
+				return -1
 			elif i > k:
 				#po[V_2[b]].append(V_2[a])
-				k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c)
+				k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
 			elif j > k:
 				#po[V_2[a]].append(V_2[b])
-				k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c)
+				k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)
 	return k
 
 def branching_algorithm(po, k, V_2, c):
@@ -129,8 +129,8 @@ def branching_algorithm(po, k, V_2, c):
 			if not isIncomparable:
 				continue
 			if ((i + j) >= 4) and isIncomparable:
-				k_i = helper.commitPartialOrdering(po1, V_2[v_1], V_2[v_2], k, c)
-				k_j = helper.commitPartialOrdering(po2, V_2[v_2], V_2[v_1], k, c)
+				k_i = helper.commitPartialOrdering(po1, V_2[v_1], V_2[v_2], k, c, V_2)
+				k_j = helper.commitPartialOrdering(po2, V_2[v_2], V_2[v_1], k, c, V_2)
 
 				#Sanks Original Return Clause
 				#return branching_algorithm(po, k - j,V_2, c) or branching_algorithm(po1, k-i,V_2, c)
@@ -153,8 +153,8 @@ def branching_algorithm(po, k, V_2, c):
 				return False
 			elif (i == 1 and j == 2) or (i == 2 and j == 1) and isDependent(po, V_2[v_1],V_2[v_2], V_2):
 				
-				k_i = helper.commitPartialOrdering(po1, V_2[v_1], V_2[v_2], k, c)
-				k_j = helper.commitPartialOrdering(po2, V_2[v_2], V_2[v_1], k, c)
+				k_i = helper.commitPartialOrdering(po1, V_2[v_1], V_2[v_2], k, c, V_2)
+				k_j = helper.commitPartialOrdering(po2, V_2[v_2], V_2[v_1], k, c, V_2)
 				# po is if we commit v_2 < v_1 , c21 = j
 				#return branching_algorithm(po, k-i, V_2, c) or branching_algorithm(po1, k-j, V_2, c)
 				#return branching_algorithm(po, k-j, V_2, c) or branching_algorithm(po1, k-i, V_2, c)
@@ -176,25 +176,9 @@ def branching_algorithm(po, k, V_2, c):
 			if not isIncomparable:
 				continue		
 			elif i == 1 and j == 1:
-				k = helper.commitPartialOrdering(po, V_2[v_1], V_2[v_2], k, c)
+				k = helper.commitPartialOrdering(po, V_2[v_1], V_2[v_2], k, c, V_2)
 
 				return branching_algorithm(po, k, V_2, c)
 	return True
-
-# Checks if two vertices are comparable 
-def incomparable(po, a, b):
-	if (b not in po[a]) and (a not in po[b]):
-		return True
-	return False
-
-# Checks if two vertices are dependent on any vertices
-def isDependent(po, a, b, V_2):
-	for vertex in V_2:
-		if a == vertex or b == vertex:
-			continue
-		if incomparable(po, a, vertex) or incomparable(po, b, vertex):
-			return True
-	return False
-
 
 
