@@ -26,6 +26,7 @@ from graphlib import TopologicalSorter
 def readInput(fileName):
 	f = open(fileName, "r")
 	strong = f.read()
+	#print(strong)
 	lines = strong.split('\n')[:-1]
 	removelist = []
 	for i in lines:
@@ -38,9 +39,8 @@ def readInput(fileName):
 	graph = {}
 	V_2 = []
 	V_1 = []
+	Isolated = []
 	#Deniz added this to calculate V_2
-	for x in range(int(dimensions[3])):
-		V_2.append(int(dimensions[2]) + (x + 1))
 	#end
 	for x in range(int(dimensions[2])):
 		#graph[(x + 1)] = []
@@ -55,8 +55,18 @@ def readInput(fileName):
 		if int(binglet[1]) not in graph.keys():
 			graph[int(binglet[1])] = []
 		graph[int(binglet[1])].append(int(binglet[0]))
-
-	return (graph, V_1, V_2)
+	
+	
+	for x in range(int(dimensions[2]) + 1, int(dimensions[3]) + int(dimensions[2]) + 1):
+		if x in graph.keys():
+			V_2.append(x)
+		else:
+			Isolated.append(x)
+	i = 0
+	for x in graph.keys():
+		#print(x, len(graph[x]))
+		i += len(graph[x])
+	return (graph, V_1, V_2, Isolated)
 	#function to read in stdin and populate graph object
 	#graph object: adjacency list 
 	#Dictionary, key : vertex, value List<vertex> 
@@ -123,6 +133,8 @@ def writeOutput(V_2_set, partial_order):
 
 #gets the number of crossings between {a,b} in V_2 assuming a < b
 def getCrossings(a, b, c):
+	if a == b:
+		return 0
 	return c[a][b]
 
 #crossings are computed and stored in a dictionary of dictionaries

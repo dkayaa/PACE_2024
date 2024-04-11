@@ -20,19 +20,19 @@ class Test(unittest.TestCase):
 
 	def test_minimise_1(self):
 		c = lambda k, i , o : k >= 15
-		val = algorithm.minimise(20, c);
+		val = algorithm.minimise(c, {}, {});
 		self.assertEqual(val, 15, "minimise returned: " + str(val))
 
 	def test_minimise_2(self):
 		c = lambda k, i , o : k >= 5
-		val = algorithm.minimise(20, c)
+		val = algorithm.minimise(c, {}, {})
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
 
 	def test_minimise_3(self):
 		o = {}
 		i = {10:[10]}
 		c = lambda k, i , o : k >= 5
-		val = algorithm.minimise(20, c)
+		val = algorithm.minimise(c, {}, {})
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
 		self.assertEqual(i, {10:[10]}, "input not equal: " + str(o))
 		myfunc(val,i,o)
@@ -203,9 +203,9 @@ class Test(unittest.TestCase):
 	def test_commitPO2(self):
 		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
 		po = {1: [2], 2:[], 3:[]}
-		k = 0
+		k = 10
 		k = helper.commitPartialOrdering(po, 2, 3, k, c, [1, 2, 3])
-		self.assertEqual(k, -7, "incorrect")
+		self.assertEqual(k, 3, "incorrect")
 		self.assertEqual(po, {1: [2,3], 2:[3], 3:[]},"incorrect")
 
 	def test_isTransitive1(self):

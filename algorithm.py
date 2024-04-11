@@ -215,6 +215,7 @@ def main():
 	V_2 = input[2]
 	V_1 = input[1]
 	G = input[0]
+	Isolated = input[3]
 	c = {}
 	helper.computeAllCrossings(c, G, V_2, V_1)
 	input2 = (G, V_1, V_2, c)
@@ -225,11 +226,12 @@ def main():
 	k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
 	po = {}
 
-	k = minimise(BruteForce, input2, po)
-	BruteForce(k, input2, po)
+	k = minimise(Algorithm1, input2, po)
+	r = Algorithm1(k, input2, po)
 	out = helper.writeOutput(V_2, po)
+	out = out + Isolated
 	for v in out:
 		print(v)
 
 #execute
-main()
+#main()
