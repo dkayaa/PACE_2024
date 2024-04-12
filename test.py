@@ -234,4 +234,5 @@ class Test(unittest.TestCase):
 #-------------------------------------#
 	
 #execute unittest main method to run unit tests.
-unittest.main()
+if __name__ == "__main__":
+	unittest.main()

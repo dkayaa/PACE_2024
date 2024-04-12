@@ -75,4 +75,5 @@ def main():
 		print(v)
 
 #execute
-main()
+if __name__ == "__main__":
+	main()
