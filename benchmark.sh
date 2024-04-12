@@ -9,7 +9,7 @@ echo "" > $2
 # Check if the '$1' directory exists
 if [ -d "$1" ]; then
     for file in $1/*; do
-		echo "time python3 algorithm.py $file" >> $2
+		echo "time python3 algorithm.py $file b2" >> $2
 		{ time python3 algorithm.py $file; } 2>> $2
 		echo "------------------------------" >>$2
     done
