@@ -16,7 +16,7 @@ def BruteForce2(k, input, order):
 def BruteForceRecursing2(order, k, V_2, c, index):
 	if k < 0:
 		return False
-
+	
 	if len(order) == len(V_2):
 		return True
 

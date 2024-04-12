@@ -64,15 +64,15 @@ def main():
 			incomparable[a].append(b)
 
 	input2 = (G, V_1, V_2, c, incomparable)
-	onBruteForce = True
+	onBruteForce = False
 	if onBruteForce:
 		po = []
 	else:
 		po = {}
 
-	k = maximise(BruteForce2, input2, po, minimum)
+	k = maximise(Algorithm1, input2, po, minimum)
 	po.clear()
-	r = BruteForce2(k, input2, po)
+	r = Algorithm1(k, input2, po)
 	if isinstance(po, dict):
 		out = helper.writeOutput(V_2, po)
 	else:

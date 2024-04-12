@@ -1,101 +1,89 @@
 
-time python3 algorithm.py mytestsSparse/instances/1.gr
+time python3 algorithm.py mytests/instances/19_sorted_cycle.gr
 Traceback (most recent call last):
-  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 237, in <module>
-    for b in po[a]:
-  ^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 229, in main
-    k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 127, in minimise
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 88, in <module>
+    main()
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 73, in main
+    k = maximise(BruteForce, input2, po, minimum)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 22, in maximise
     if cb(0, input2, output) == True:
        ^^^^^^^^^^^^^^^^^^^^^
   File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 14, in BruteForce
     r = BruteForceRecursing(output, k, V_2, c)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [Previous line repeated 52 more times]
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [Previous line repeated 38 more times]
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [Previous line repeated 4 more times]
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
-    if BruteForceRecursing(po_a, ka, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
-    if BruteForceRecursing(po_b, kb, V_2, c):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [Previous line repeated 2 more times]
-  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 42, in BruteForceRecursing
-    po_a = copy.deepcopy(po)
-           ^^^^^^^^^^^^^^^^^
-  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 146, in deepcopy
-    y = copier(x, memo)
-        ^^^^^^^^^^^^^^^
-  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 231, in _deepcopy_dict
-    y[deepcopy(key, memo)] = deepcopy(value, memo)
-                             ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 146, in deepcopy
-    y = copier(x, memo)
-        ^^^^^^^^^^^^^^^
-  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 206, in _deepcopy_list
-    append(deepcopy(a, memo))
-           ^^^^^^^^^^^^^^^^^
-  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 144, in deepcopy
-    copier = _deepcopy_dispatch.get(cls)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-KeyboardInterrupt
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 43, in BruteForceRecursing
+    ka = helper.commitPartialOrdering(po_a, v_a, v_b, k, c, V_2)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: commitPartialOrdering() missing 1 required positional argument: 'icp'
+
+real	0m0.014s
+user	0m0.007s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances/3star_15.gr
+Traceback (most recent call last):
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 88, in <module>
+    main()
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 73, in main
+    k = maximise(BruteForce, input2, po, minimum)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 22, in maximise
+    if cb(0, input2, output) == True:
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 14, in BruteForce
+    r = BruteForceRecursing(output, k, V_2, c)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 43, in BruteForceRecursing
+    ka = helper.commitPartialOrdering(po_a, v_a, v_b, k, c, V_2)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: commitPartialOrdering() missing 1 required positional argument: 'icp'
+
+real	0m0.015s
+user	0m0.013s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances/shuffled_20cycle.gr
+Traceback (most recent call last):
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 88, in <module>
+    main()
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 73, in main
+    k = maximise(BruteForce, input2, po, minimum)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 22, in maximise
+    if cb(0, input2, output) == True:
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 14, in BruteForce
+    r = BruteForceRecursing(output, k, V_2, c)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 43, in BruteForceRecursing
+    ka = helper.commitPartialOrdering(po_a, v_a, v_b, k, c, V_2)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: commitPartialOrdering() missing 1 required positional argument: 'icp'
+
+real	0m0.014s
+user	0m0.000s
+sys	0m0.008s
+------------------------------
+time python3 algorithm.py mytests/instances/star_20.gr
+Traceback (most recent call last):
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 88, in <module>
+    main()
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 73, in main
+    k = maximise(BruteForce, input2, po, minimum)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 22, in maximise
+    if cb(0, input2, output) == True:
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 14, in BruteForce
+    r = BruteForceRecursing(output, k, V_2, c)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 43, in BruteForceRecursing
+    ka = helper.commitPartialOrdering(po_a, v_a, v_b, k, c, V_2)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: commitPartialOrdering() missing 1 required positional argument: 'icp'
+
+real	0m0.012s
+user	0m0.004s
+sys	0m0.000s
+------------------------------

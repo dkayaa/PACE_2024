@@ -1,0 +1,25 @@
+
+time python3 algorithm.py mytests/instances/19_sorted_cycle.gr
+
+real	0m0.205s
+user	0m0.197s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances/3star_15.gr
+
+real	0m0.014s
+user	0m0.013s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances/shuffled_20cycle.gr
+
+real	0m2.296s
+user	0m2.296s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances/star_20.gr
+
+real	0m0.013s
+user	0m0.013s
+sys	0m0.000s
+------------------------------

@@ -1,13 +1,19 @@
 
-time python3 algorithm.py mytests/instances//1.gr
+time python3 algorithm.py mytests/instances/19_sorted_cycle.gr
 
-real	0m4.544s
-user	0m4.536s
+real	0m0.405s
+user	0m0.397s
 sys	0m0.000s
 ------------------------------
-time python3 algorithm.py mytests/instances//2.gr
+time python3 algorithm.py mytests/instances/2.gr
 
-real	4m5.018s
-user	4m4.951s
+real	4m13.334s
+user	4m13.271s
 sys	0m0.060s
+------------------------------
+time python3 algorithm.py mytests/instances/3star_15.gr
+
+real	0m0.014s
+user	0m0.008s
+sys	0m0.000s
 ------------------------------

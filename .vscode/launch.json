@@ -84,6 +84,14 @@
 			"console": "integratedTerminal",
 			"args": ["./medium_test_set/instances/4.gr"]
 		},
+		{
+			"name": "Python Debugger: 19_sorted_cycle",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./mytests/instances/19_sorted_cycle.gr"]
+		},
 		
 	]
 }
