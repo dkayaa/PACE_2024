@@ -84,6 +84,14 @@
 			"console": "integratedTerminal",
 			"args": ["./medium_test_set/instances/4.gr"]
 		},
+		{
+			"name": "Python Debugger: Current me - large cycles",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./mytests/instances/large_cycle.gr"]
+		}
 		
 	]
 }
