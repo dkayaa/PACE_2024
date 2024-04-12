@@ -60,7 +60,7 @@ def main():
 				alg = Algorithm1
 			case _:
 				alg = Algorithm1
-
+	#lol
 	#input = (G, V_1, V_2)
 	input = helper.readInput(sys.argv[1])
 	V_2 = input[2]
