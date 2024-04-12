@@ -47,6 +47,21 @@ def main():
 		print("No inputs")
 		return
 	
+	alg = Algorithm1
+	onBruteForce = False
+	if len(sys.argv) == 3:
+		match sys.argv[2]:
+			case "b1":
+				alg = BruteForce
+				onBruteForce = True
+			case "b2":
+				alg = BruteForce2
+				onBruteForce = True
+			case "fpt":
+				alg = Algorithm1
+			case _:
+				alg = Algorithm1
+
 	#input = (G, V_1, V_2)
 	input = helper.readInput(sys.argv[1])
 	V_2 = input[2]
@@ -64,15 +79,14 @@ def main():
 			incomparable[a].append(b)
 
 	input2 = (G, V_1, V_2, c, incomparable)
-	onBruteForce = True
 	if onBruteForce:
 		po = []
 	else:
 		po = {}
 
-	k = maximise(BruteForce2, input2, po, minimum)
+	k = maximise(alg, input2, po, minimum)
 	po.clear()
-	r = BruteForce2(k, input2, po)
+	r = alg(k, input2, po)
 	if isinstance(po, dict):
 		out = helper.writeOutput(V_2, po)
 	else:
