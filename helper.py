@@ -172,7 +172,7 @@ def computeAllCrossings(c, G, V_2, V_1):
 						c[V_2[b1_i]][V_2[a1_i]]+=1
 					elif(b1_i < a1_i) and (b2_i < a2_i):
 						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing   
-		total += min(c[V_2[b1_i]][V_2[a1_i]], c[V_2[a1_i]][V_2[b1_i]]) 
+		total += min(c[V_2[b1]][V_2[a1]], c[V_2[a1]][V_2[b1]]) 
 	return total
 			
 def insertPartialOrdering(po, a, b, icp = None):
