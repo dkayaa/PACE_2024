@@ -83,9 +83,9 @@ def main():
 	else:
 		po = {}
 
-	k = maximise(BruteForce2, input2, po, minimum)
+	k = maximise(alg, input2, po, minimum)
 	po.clear()
-	r = BruteForce2(k, input2, po)
+	r = alg(k, input2, po)
 	if isinstance(po, dict):
 		out = helper.writeOutput(V_2, po)
 	else:
