@@ -1,0 +1,13 @@
+
+time python3 algorithm.py mytests/instances//1.gr
+
+real	0m4.795s
+user	0m4.789s
+sys	0m0.000s
+------------------------------
+time python3 algorithm.py mytests/instances//2.gr
+
+real	4m6.360s
+user	4m6.239s
+sys	0m0.110s
+------------------------------

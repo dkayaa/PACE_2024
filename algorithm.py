@@ -5,7 +5,7 @@ import helper
 import copy
 from bruteforce import BruteForce
 
-def maximise(cb = None, input = None, output = None):
+def maximise(cb = None, input = None, output = None, minimum = None):
 	#po, k, V_2, c
 	#variables 
 	#output : output data structure for cb() to populate. This is an empty List Partial Ordering to be populated 
@@ -23,7 +23,7 @@ def maximise(cb = None, input = None, output = None):
 		output.clear()
 		input2 = copy.deepcopy(input)
 		m = 1 #first find maximal m 
-		while not cb(m, input2, output):
+		while m < minimum or not cb(m, input2, output):
 			output.clear()
 			input2 = copy.deepcopy(input)
 			left = m
@@ -53,7 +53,7 @@ def main():
 	G = input[0]
 	Isolated = input[3]
 	c = {}
-	helper.computeAllCrossings(c, G, V_2, V_1)
+	minimum = helper.computeAllCrossings(c, G, V_2, V_1)
 	incomparable = {}
 	for a in V_2:
 		incomparable[a] = []
@@ -65,7 +65,7 @@ def main():
 	input2 = (G, V_1, V_2, c, incomparable)
 	po = {}
 
-	k = maximise(Algorithm1, input2, po)
+	k = maximise(Algorithm1, input2, po, minimum)
 	r = Algorithm1(k, input2, po)
 	out = helper.writeOutput(V_2, po)
 

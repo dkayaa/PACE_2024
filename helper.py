@@ -151,7 +151,7 @@ def computeAllCrossings(c, G, V_2, V_1):
 				c[V_2[a]][V_2[b]]= -1
 			else:
 				c[V_2[a]][V_2[b]]= 0
-
+	total = 0
 	for a1 in range(n): #vertex in V_2
 		for b1 in range (a1, n): #vertex in V_2
 			if (a1 == b1):
@@ -171,7 +171,9 @@ def computeAllCrossings(c, G, V_2, V_1):
 					elif(b1_i < a1_i) and (b2_i > a2_i):
 						c[V_2[b1_i]][V_2[a1_i]]+=1
 					elif(b1_i < a1_i) and (b2_i < a2_i):
-						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing    
+						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing   
+		total += min(c[V_2[b1_i]][V_2[a1_i]], c[V_2[a1_i]][V_2[b1_i]]) 
+	return total
 			
 def insertPartialOrdering(po, a, b, icp = None):
 	if a not in po.keys():

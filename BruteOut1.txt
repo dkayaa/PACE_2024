@@ -1,0 +1,101 @@
+
+time python3 algorithm.py mytestsSparse/instances/1.gr
+Traceback (most recent call last):
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 237, in <module>
+    for b in po[a]:
+  ^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 229, in main
+    k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/algorithm.py", line 127, in minimise
+    if cb(0, input2, output) == True:
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 14, in BruteForce
+    r = BruteForceRecursing(output, k, V_2, c)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 52 more times]
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 38 more times]
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 4 more times]
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 45, in BruteForceRecursing
+    if BruteForceRecursing(po_a, ka, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 54, in BruteForceRecursing
+    if BruteForceRecursing(po_b, kb, V_2, c):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/home/sank_system/comp6741/PACE_2024/bruteforce.py", line 42, in BruteForceRecursing
+    po_a = copy.deepcopy(po)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 231, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 206, in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/copy.py", line 144, in deepcopy
+    copier = _deepcopy_dispatch.get(cls)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
