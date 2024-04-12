@@ -61,7 +61,7 @@
 			"args": ["./medium_test_set/instances/11.gr"]
 		},
 		{
-			"name": "Python Debugger: Current medium -1",
+			"name": "Python Debugger: Current medium - 3",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "algorithm.py",
@@ -75,7 +75,15 @@
 			"program": "algorithm.py",
 			"console": "integratedTerminal",
 			"args": ["./tiny_test_set/path_9_sorted.gr"]
-		}
+		},
+		{
+			"name": "Python Debugger: Current medium - 4",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "algorithm.py",
+			"console": "integratedTerminal",
+			"args": ["./medium_test_set/instances/4.gr"]
+		},
 		
 	]
 }

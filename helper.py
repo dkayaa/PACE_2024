@@ -173,13 +173,16 @@ def computeAllCrossings(c, G, V_2, V_1):
 					elif(b1_i < a1_i) and (b2_i < a2_i):
 						c[V_2[a1_i]][V_2[b1_i]]+=1 #swapping them would force a crossing    
 			
-def insertPartialOrdering(po, a, b):
+def insertPartialOrdering(po, a, b, icp = None):
 	if a not in po.keys():
 		po[a] = []
 	if b not in po[a]:
 		po[a].append(b)
+		if icp:
+			icp[a].remove(b)
+			icp[b].remove(a)
 
-def commitPartialOrdering(po, a, b, k, c, V_2):
+def commitPartialOrdering(po, a, b, k, c, V_2, icp):
 	#commits to partial order and does parameter accounting. 
 	#parameter accounting
 	#committing a < b to Poset. but b < a
@@ -197,7 +200,7 @@ def commitPartialOrdering(po, a, b, k, c, V_2):
 
 	#first calculate k = k - c_ab
 	k = k - getCrossings(a, b, c)
-	insertPartialOrdering(po, a, b)
+	insertPartialOrdering(po, a, b, icp)
 	if k < 0:
 		return k
 	#for any x such that b < x. commit a < x and do param accounting
@@ -206,7 +209,7 @@ def commitPartialOrdering(po, a, b, k, c, V_2):
 		#insertPartialOrdering(po, a, x)
 		#if isTransitive(po, a, x, V_2):
 		if x not in po[a]:
-			k = commitPartialOrdering(po,a, x, k, c, V_2)
+			k = commitPartialOrdering(po,a, x, k, c, V_2, icp)
 		if k < 0:
 			return k
 	
@@ -218,7 +221,7 @@ def commitPartialOrdering(po, a, b, k, c, V_2):
 			#k = k - getCrossings(y, b, c)
 			#insertPartialOrdering(po, y, b)
 			#if isTransitive(po, y, b, V_2):
-			k = commitPartialOrdering(po, y, b, k, c, V_2)
+			k = commitPartialOrdering(po, y, b, k, c, V_2, icp)
 			if k < 0:
 				return k
 	return k

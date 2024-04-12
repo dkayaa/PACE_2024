@@ -7,7 +7,7 @@ from bruteforce import BruteForce
 
 #Simplification Rules
 
-def RR1(po, V_2, c, k):
+def RR1(po, V_2, c, k, icp):
 	#any pair of vertices {a.b} in V_2 that form a 0/j pattern,
 	#commit a < b to the Poset. 
 	n = len(V_2)
@@ -19,20 +19,20 @@ def RR1(po, V_2, c, k):
 				c_ab = helper.getCrossings(V_2[a],V_2[b], c)
 				c_ba = helper.getCrossings(V_2[b],V_2[a], c)			
 				if((c_ab == 0) and (c_ba > 0)): # commit a < b
-					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k , c, V_2)
+					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k , c, V_2, icp)
 					#po[V_2[a]].append(V_2[b])
 				elif((c_ba == 0) and (c_ab > 0)): # commit b < a
-					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
+					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2, icp)
 					#po[V_2[b]].append(V_2[a])
 				if c_ab == 0 and c_ba == 0:
-					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2)
+					k = helper.commitPartialOrdering(po, V_2[b], V_2[a], k, c, V_2, icp)
 				if k < 0:
 					return k
 
 	 		
 	return k
 
-def RR2(k, po, V_2, G, c):
+def RR2(k, po, V_2, G, c, icp):
 	#any pair of vertices {a,b} in V_2 such that N(a)\{a} = N(b)\{b}
 	#commit a < b to Poset and do parameter accounting k = k - c_ab
 
@@ -48,12 +48,12 @@ def RR2(k, po, V_2, G, c):
 				cnb_b.remove(V_2[b])
 				if cnb_a == cnb_b :
 					#po[V_2[a]].append(V_2[b])
-					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)
+					k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2, icp)
 				if k < 0:
 					return k
 	return k
 
-def RR3(k, po, V_2, c):
+def RR3(k, po, V_2, c, icp):
 	#for each pair of vertices {b,a} that form a 2/1 pattern
 	#commit a<b to the Poset and do param accounting 
 	n = len(V_2)
@@ -64,7 +64,7 @@ def RR3(k, po, V_2, c):
 			c_ab = helper.getCrossings(V_2[a], V_2[b], c)
 			c_ba = helper.getCrossings(V_2[b], V_2[a], c)
 			if (c_ab == 1) and (c_ba == 2):
-				k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2)	
+				k = helper.commitPartialOrdering(po, V_2[a], V_2[b], k, c, V_2, icp)	
 			if k < 0:
 				return k
 	return k
@@ -109,7 +109,7 @@ def minimise1(k_max, cb = None, input = None, output = None):
 		return left + 1
 		#return i
 
-def minimise(cb = None, input = None, output = None):
+def maximise(cb = None, input = None, output = None):
 #po, k, V_2, c
 	#variables 
 	#output : output data structure for cb() to populate. This is an empty List Partial Ordering to be populated 
@@ -126,6 +126,8 @@ def minimise(cb = None, input = None, output = None):
 	if cb:
 		if cb(0, input2, output) == True:
 			return 0
+		output.clear()
+		input2 = copy.deepcopy(input)
 		m = 1 #first find maximal m 
 		while not cb(m, input2, output):
 			output.clear()
@@ -135,6 +137,7 @@ def minimise(cb = None, input = None, output = None):
 		right = m
 		
 		while left < right:
+			output.clear()
 			mid = left + (right - left + 1) // 2  # Adding 1 to ensure rounding up
 			input2 = copy.deepcopy(input)
 			if cb(mid, input2, output) == False:
@@ -142,7 +145,7 @@ def minimise(cb = None, input = None, output = None):
 			else:
 				right = mid - 1
 
-			output.clear()
+			
 		
 		
 
@@ -158,23 +161,31 @@ def minimise(cb = None, input = None, output = None):
 		return left + 1
 		#return i
 
-def Kernalize(G, V_2, po, k, c):
+def Kernalize(G, V_2, po, k, c, icp):
 	#apply exhaustively
 	prevK = -1
 	while prevK != k: 
 		prevK = k
 		#print("got here")
-		k = RR1(po, V_2, c, k)
+		k = RR1(po, V_2, c, k, icp)
+		if k < 0:
+			return k
 		#print("got here")
-		k = RR2(k, po, V_2, G, c)
+		k = RR2(k, po, V_2, G, c, icp)
+		if k < 0:
+			return k
 
 	#apply RRL01 RRL02 and RRlarge exhaustivaly 
 	prevK = -1
 	while prevK != k:
 		prevK = k
 		RRL01(po, V_2)
-		k = RRL02(po, V_2, c, k)
-		k = RRlarge(po, V_2, c, k)
+		k = RRL02(po, V_2, c, k, icp)
+		if k < 0:
+			return k
+		k = RRlarge(po, V_2, c, k, icp)
+		if k < 0:
+			return k
 	return k
 	
  
@@ -184,24 +195,23 @@ def Algorithm1 (k, input, output):
 	V_1 = input[1]
 	V_2 = input[2]
 	c = input[3]
+	icp = input[4]
+
 	for key in G.keys():
 		output[key] = []
 	
-
-
-
-	k = Kernalize(G, V_2, output, k, c)
+	k = Kernalize(G, V_2, output, k, c, icp)
 	if k < 0:
 		return False
 	#apply RR3 exhaustively
 	prevK = -1
 	while prevK != k:
 		prevK = k
-		k = RR3(k, output, V_2, c)
+		k = RR3(k, output, V_2, c, icp)
 		if k < 0:
 			return False
 
-	r = branching_algorithm(output, k, V_2, c)
+	r = branching_algorithm(output, k, V_2, c, icp)
 	return r
 
 #main 
@@ -218,20 +228,38 @@ def main():
 	Isolated = input[3]
 	c = {}
 	helper.computeAllCrossings(c, G, V_2, V_1)
-	input2 = (G, V_1, V_2, c)
+	incomparable = {}
+	for a in V_2:
+		incomparable[a] = []
+		for b in V_2:
+			if a == b:
+				continue 
+			incomparable[a].append(b)
+
+
+	input2 = (G, V_1, V_2, c, incomparable)
 	
 	#k_max = 20 #<=== need to fix this once validated branching 
-	n = len(V_2)
-	m = len(V_1)
-	k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
+	#n = len(V_2)
+	#m = len(V_1)
+	#k_max = int(((n*(n-1))/2)*((m*(m-1))/2))
 	po = {}
 
-	k = minimise(Algorithm1, input2, po)
+	k = maximise(Algorithm1, input2, po)
 	r = Algorithm1(k, input2, po)
 	out = helper.writeOutput(V_2, po)
+
+	cum = 0
+	for x in range(len(out)):
+		for y in range(x + 1, len(out)):
+			if out[x] == out[y]:
+				continue 
+			cum = cum + c[out[x]][out[y]]
+
 	out = out + Isolated
+	#print(out)
 	for v in out:
 		print(v)
 
 #execute
-#main()
+main()
