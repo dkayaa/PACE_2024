@@ -84,14 +84,6 @@
 			"console": "integratedTerminal",
 			"args": ["./medium_test_set/instances/4.gr"]
 		},
-		{
-			"name": "Python Debugger: Current matching_4_4",
-			"type": "debugpy",
-			"request": "launch",
-			"program": "algorithm.py",
-			"console": "integratedTerminal",
-			"args": ["./tiny_test_set/matching_4_4.gr"]
-		},
 		
 	]
 }
