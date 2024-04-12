@@ -53,7 +53,6 @@ def main():
 		match sys.argv[2]:
 			case "b1":
 				alg = BruteForce
-				onBruteForce = True
 			case "b2":
 				alg = BruteForce2
 				onBruteForce = True
