@@ -18,21 +18,21 @@ def myfunc(k, i, o):
 #-------------------------------------#
 class Test(unittest.TestCase):
 
-	def test_minimise_1(self):
+	def test_maximise_1(self):
 		c = lambda k, i , o : k >= 15
-		val = algorithm.minimise(c, {}, {});
+		val = algorithm.maximise(c, {}, {});
 		self.assertEqual(val, 15, "minimise returned: " + str(val))
 
-	def test_minimise_2(self):
+	def test_maximise_2(self):
 		c = lambda k, i , o : k >= 5
-		val = algorithm.minimise(c, {}, {})
+		val = algorithm.maximise(c, {}, {})
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
 
-	def test_minimise_3(self):
+	def test_maximise_3(self):
 		o = {}
 		i = {10:[10]}
 		c = lambda k, i , o : k >= 5
-		val = algorithm.minimise(c, {}, {})
+		val = algorithm.maximise(c, {}, {})
 		self.assertEqual(val, 5, "minimise returned: " + str(val))
 		self.assertEqual(i, {10:[10]}, "input not equal: " + str(o))
 		myfunc(val,i,o)
@@ -110,12 +110,12 @@ class Test(unittest.TestCase):
 		G[2] = [3,4]
 		G[3] = [2,1]
 		G[4] = [1,2]
-
+		icp1 = {3:[4], 4:[3]}
+		icp2 = {3:[4], 4:[3]}
 		helper.computeAllCrossings(c, G, V_2, V_1)
-		
-		val = branching.branching_algorithm(pos, 0, V_2, c)
+		val = branching.branching_algorithm(pos, 0, V_2, c, icp1)
 		self.assertEqual(val, False, "The is a " + str(val) + " instance")
-		val = branching.branching_algorithm(pos, 1, V_2, c)
+		val = branching.branching_algorithm(pos, 1, V_2, c, icp2)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
 	
 	def test_branching2XP2(self):
@@ -128,8 +128,8 @@ class Test(unittest.TestCase):
 		G[2] = [4]
 		G[3] = [1]
 		G[4] = [2]
-		
-		val = branching.branching_algorithm(pos, 0, V_2, c)
+		icp = {3:[4], 4:[3]}
+		val = branching.branching_algorithm(pos, 0, V_2, c, icp)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
 		
 	
@@ -148,10 +148,12 @@ class Test(unittest.TestCase):
 		G[4] = [1,2,3]
 		G[5] = [1,2,3]
 		G[6] = [1,2,3]
-		
-		val = branching.branching_algorithm(pos, 8, V_2, c)
+		icp1 = {4:[5,6], 5:[4,6], 6:[4,5]}
+		icp2 = {4:[5,6], 5:[4,6], 6:[4,5]}
+
+		val = branching.branching_algorithm(pos, 8, V_2, c, icp1)
 		self.assertEqual(val, False, "The is a " + str(val) + " instance")
-		val = branching.branching_algorithm(pos, 9, V_2, c)
+		val = branching.branching_algorithm(pos, 9, V_2, c, icp2)
 		self.assertEqual(val, True, "The is a " + str(val) + " instance")
 
 	def test_linearOrder_1(self):
@@ -196,7 +198,7 @@ class Test(unittest.TestCase):
 		c = {1: {2: 0, 3:0}, 2: {1: 0, 3:0}, 3: {1:0, 2:10}}
 		po = {1: [2], 2:[], 3:[]}
 		k = 0
-		k = helper.commitPartialOrdering(po, 3, 1, k, c, [1, 2, 3])
+		k = helper.commitPartialOrdering(po, 3, 1, k, c, [1, 2, 3], None)
 		self.assertEqual(k, -10, "incorrect")
 
 	#if 1 < 2 and commit  2 < 3 then 1 < 3 committed by transitivity
@@ -204,7 +206,7 @@ class Test(unittest.TestCase):
 		c = {1: {2: 0, 3:2}, 2: {1: 0, 3:5}, 3: {1:0, 2:0}}
 		po = {1: [2], 2:[], 3:[]}
 		k = 10
-		k = helper.commitPartialOrdering(po, 2, 3, k, c, [1, 2, 3])
+		k = helper.commitPartialOrdering(po, 2, 3, k, c, [1, 2, 3], None)
 		self.assertEqual(k, 3, "incorrect")
 		self.assertEqual(po, {1: [2,3], 2:[3], 3:[]},"incorrect")
 
